@@ -1,4 +1,4 @@
-# Makefile for qsort and test
+# Makefile for fsort and test
 
 SHELL = cmd
 FC := gfortran
@@ -7,32 +7,32 @@ ARCH := ar
 ARCHFLAGS := -rsc
 
 .PHONY: all
-all: libqsort.a
+all: libfsort.a
 
-qsort_mod.mod: libqsort.a
+fsort_mod.mod: libfsort.a
 
-libqsort.a: qsort.obj
+libfsort.a: fsort.obj
 	@echo Generating archive $@ ...
 	$(ARCH) $(ARCHFLAGS) $@ $^
 
-qsort.obj: qsort.f90
+fsort.obj: fsort.f90
 	@echo Compiling $@ ...
-	$(FC) -o $@ -c $< -static -s
+	$(FC) -o $@ -c $< -I . -static -s
 
 .PNONY: test
 test: test.exe
 
-test.exe: test.obj libqsort.a qsort_mod.mod
+test.exe: test.obj libfsort.a fsort_mod.mod
 	@echo Linking $@ ...
-	$(FLINKER) -o $@ $< -L . -l qsort -static
+	$(FLINKER) -o $@ $< -L . -l fsort -static -s
 
-test.obj: test.f90 qsort_mod.mod
+test.obj: test.f90 fsort_mod.mod
 	@echo Compiling $@ ...
 	$(FC) -o $@ -c $< -static -s
 
 .PHONY: clean
 clean:
-	-del *.a *.mod *.obj *.exe * 1> NUL 2> NUL
+	-del *.a *.mod *.obj *.exe 1> NUL 2> NUL
 
 .PHONY: clean_tmp
 clean_tmp:

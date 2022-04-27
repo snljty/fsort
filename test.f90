@@ -1,11 +1,12 @@
-! test for qsort
+! test for fsort
 
 program main
-    use qsort_mod
+    use fsort_mod
     implicit none
     integer(kind=4), parameter :: n = 12
     real(kind=8), dimension(:), pointer :: m
     character(kind=1,len=18) :: fmt
+    integer(kind=4) :: i
 
     allocate(m(n))
 
@@ -14,8 +15,10 @@ program main
     call random_number(m)
     m = m * real(n)
 
+    write(*, "(a)") "Before sorting:"
     write(*, trim(fmt)) m
-    call qsort_real(m, 1, n)
+    call fsort(m, 1, n)
+    write(*, "(a)") "After sorted:"
     write(*, trim(fmt)) m
 
     deallocate(m)
