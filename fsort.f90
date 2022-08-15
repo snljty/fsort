@@ -62,14 +62,14 @@ module fsort_mod
                             son = son + 1
                         end if
                     end if
-                    if ((arr(son) .lt. arr(dad)) .or. (arr(son) == arr(dad))) then
-                        exit
-                    else
+                    if (.not. (arr(son) .lt. arr(dad)) then
                         tmp = arr(dad)
                         arr(dad) = arr(son)
                         arr(son) = tmp
                         dad = son
                         son = dad * 2
+                    else
+                        exit
                     end if
                 end do
             end do
@@ -85,14 +85,14 @@ module fsort_mod
                             son = son + 1
                         end if
                     end if
-                    if (arr(son) .lt. arr(dad)) then
-                        exit
-                    else
+                    if (.not. (arr(son) .lt. arr(dad)) then
                         tmp = arr(dad)
                         arr(dad) = arr(son)
                         arr(son) = tmp
                         dad = son
                         son = dad * 2
+                    else
+                        exit
                     end if
                 end do
             end do
