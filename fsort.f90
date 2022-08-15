@@ -62,7 +62,7 @@ module fsort_mod
                             son = son + 1
                         end if
                     end if
-                    if (arr(son) .lt. arr(dad)) then
+                    if ((arr(son) .lt. arr(dad)) .or. (arr(son) == arr(dad))) then
                         exit
                     else
                         tmp = arr(dad)
